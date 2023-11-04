@@ -8,8 +8,10 @@
 #rect(width: 15*30pt, height: 13*30pt, inset: 0pt,
     [
 
+    // point numbers
     #place(top + left,
         dx: 1 * 30pt,
+        dy: -0.1pt,
         stack(
             dir:ltr,
 
@@ -66,6 +68,7 @@
 
     #place(top + right,
         dx: -1 * 30pt,
+        dy: -0.2pt,
         stack(
             dir:ltr,
 
@@ -122,12 +125,13 @@
 
     #place(bottom + left,
         dx: 1 * 30pt,
+        dy: -0.1pt,
         stack(
             dir:ltr,
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 12
                 ]
@@ -135,7 +139,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 11
                 ]
@@ -143,7 +147,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 10
                 ]
@@ -151,7 +155,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 9
                 ]
@@ -159,7 +163,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 8
                 ]
@@ -167,7 +171,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 7
                 ]
@@ -178,12 +182,13 @@
 
     #place(bottom + right,
         dx: -1 * 30pt,
+        dy: -0.1pt,
         stack(
             dir:ltr,
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 6
                 ]
@@ -191,7 +196,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 5
                 ]
@@ -199,7 +204,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 4
                 ]
@@ -207,7 +212,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 3
                 ]
@@ -215,7 +220,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 2
                 ]
@@ -223,7 +228,7 @@
 
             square(size: 30pt, 
                 [
-                #set align(center + bottom)
+                #set align(center + top)
                 #set text(size: 19pt)
                 1
                 ]
@@ -233,13 +238,26 @@
     )
 
     // board
+
+    // outer board
+    #place(horizon + center,
+        rect(width: 13.2*30pt, height: 11.2*30pt, fill: black, inset: 0pt) // thickness 0.1
+    )
+
+
+    // background board
+    #place(horizon + center,
+        rect(width: 13*30pt, height: 11*30pt, fill: yellow, inset: 0pt)
+    )
+
+    // inner board
     #place(horizon + center,
         rect(width: 13*30pt, height: 11*30pt, inset: 0pt,
             [
 
             // cube
             #place(bottom + left,
-                dx: -1 * 30pt,
+                dx: -1.2 * 30pt,
                 square(size: 30pt, fill: black, radius: 5pt,
                     [
                     #set align(center + horizon)
@@ -544,7 +562,7 @@
 
             #place(
                 top + right,
-                dx: (1 -0) * 30pt,
+                dx: 1.1 * 30pt,
                 dy: 0 * 30pt,
                 stack(
                     dir:ttb,
