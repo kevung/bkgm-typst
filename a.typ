@@ -4,238 +4,15 @@
 
 #set align(center)
 
+// match or unlimited
+
+// number cherckers off
+
+// pip count
+
 // table
-#rect(width: 15*30pt, height: 13*30pt, inset: 0pt,
+#rect(width: 15.4*30pt, height: 13.4*30pt, inset: 0pt, // nb column + 2*thickness
     [
-
-    // point numbers
-    #place(top + left,
-        dx: 1 * 30pt,
-        dy: -0.1pt,
-        stack(
-            dir:ltr,
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                13
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                14
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                15
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                16
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                17
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                18
-                ]
-            ),
-
-        )
-    )
-
-    #place(top + right,
-        dx: -1 * 30pt,
-        dy: -0.2pt,
-        stack(
-            dir:ltr,
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                19
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                20
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                21
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                22
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                23
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + bottom)
-                #set text(size: 19pt)
-                24
-                ]
-            ),
-
-        )
-    )    
-
-    #place(bottom + left,
-        dx: 1 * 30pt,
-        dy: -0.1pt,
-        stack(
-            dir:ltr,
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                12
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                11
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                10
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                9
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                8
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                7
-                ]
-            ),
-
-        )
-    )
-
-    #place(bottom + right,
-        dx: -1 * 30pt,
-        dy: -0.1pt,
-        stack(
-            dir:ltr,
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                6
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                5
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                4
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                3
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                2
-                ]
-            ),
-
-            square(size: 30pt, 
-                [
-                #set align(center + top)
-                #set text(size: 19pt)
-                1
-                ]
-            ),
-
-        )
-    )
 
     // board
 
@@ -265,6 +42,233 @@
                     2
                     ])
             )
+
+            // point numbers
+            #place(top + left,
+                dy: -1.1 *30pt,
+                stack(
+                    dir:ltr,
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        13
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        14
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        15
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        16
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        17
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        18
+                        ]
+                    ),
+
+                )
+            )
+
+            #place(top + right,
+                dy: -1.1 *30pt,
+                stack(
+                    dir:ltr,
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        19
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        20
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        21
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        22
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        23
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + bottom)
+                        #set text(size: 19pt)
+                        24
+                        ]
+                    ),
+
+                )
+            )    
+
+            #place(bottom + left,
+                dy: 1.1 *30pt,
+                stack(
+                    dir:ltr,
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        12
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        11
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        10
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        9
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        8
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        7
+                        ]
+                    ),
+
+                )
+            )
+
+            #place(bottom + right,
+                dy: 1.1 *30pt, // 1 - thickness outer board
+                stack(
+                    dir:ltr,
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        6
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        5
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        4
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        3
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        2
+                        ]
+                    ),
+
+                    square(size: 30pt, 
+                        [
+                        #set align(center + top)
+                        #set text(size: 19pt)
+                        1
+                        ]
+                    ),
+
+                )
+            )
+
+
 
             // checker bar
             #place(top + center,
