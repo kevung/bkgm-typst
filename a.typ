@@ -4,6 +4,19 @@
 
 #set align(center)
 
+#grid(
+    rows: (30pt, auto, 30pt),
+    gutter: 3pt,
+
+    rect(width: 15.4*30pt, height: 30pt, inset: 0pt, [
+        #set text(size: 12pt)
+        #set align(left + horizon)
+        #set align(right + horizon)
+        (5 checkers off)
+        pip: 29
+        #h(10pt)
+        ]),
+
 // match or unlimited
 
 // number cherckers off
@@ -11,7 +24,7 @@
 // pip count
 
 // table
-#rect(width: 15.4*30pt, height: 13.4*30pt, inset: 0pt, // nb column + 2*thickness
+rect(width: 15.4*30pt, height: 13.4*30pt, inset: 0pt, // nb column + 2*thickness
     [
 
     // board
@@ -684,5 +697,14 @@
 
     // end table
     ]
-)
+),
+
+
+    rect(width: 15.4*30pt, height: 30pt, inset: 0pt, [
+        #set align(right + horizon)
+        pip: 114
+        #h(10pt)
+        ]),
+
+) // end grid
 
