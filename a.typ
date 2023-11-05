@@ -1,580 +1,280 @@
-
-// Limite du board
-#let checker_radius = 30
-
-#set align(center)
-
-#grid(
-    rows: (30pt, auto, 30pt),
-    gutter: 3pt,
-
-    grid(
-        columns: (auto, auto),
-        gutter: 3pt,
-
-        rect(width: 7.7*30pt, height: 30pt, inset: 0pt, [
-            #set text(size: 12pt)
-            #set align(left + horizon)
-            #h(10pt)
-            Unlimited match
-            ]),
-
-        rect(width: 7.7*30pt, height: 30pt, inset: 0pt, [
-            #set text(size: 12pt)
-            #set align(right + horizon)
-            (5 checkers off)
-            pip: 29
-            #h(10pt)
-            ]),
-
+#let conf = (
+    board : (
+        direction: right,
+        thickness: 3pt,
+        outerColor: black,
+        innerColor: green,
     ),
+    cube : (
+        color: black,
+        textSize: 24pt,
+        textColor: white,
+        offset: 5pt,
+    ),
+    checker : (
+        size: 30pt,
+        color1: white,
+        color2: black
+    ),
+    point: (
+        textSize: 19pt,
+        color1: blue,
+        color2: red
+    ),
+)
 
-    // table
-    rect(width: 15.4*30pt, height: 13.4*30pt, inset: 0pt, // nb column + 2*thickness
-        [
+#let _drawCube(value, textSize: 24pt) = square(
+    size: conf.checker.size,
+    fill: conf.cube.color, radius: 5pt,
+    [
+    #set align(center + horizon)
+    #set text(size: conf.cube.textSize , fill: conf.cube.textColor)
+    #value
+    ])
 
-        // board
+#let cube = (
+    draw: _drawCube,
+    direction: conf.board.direction.inv()
+)
 
-        // outer board
-        #place(horizon + center,
-            rect(width: 13.2*30pt, height: 11.2*30pt, fill: black, inset: 0pt) // thickness 0.1
+#let board = (
+    width: 13*conf.checker.size,
+    height: 11*conf.checker.size,
+)
+
+#let pointNumber(arg, vertAlign) = square(
+    size: conf.checker.size, 
+    [
+    #set align(center + vertAlign)
+    #set text(size: conf.point.textSize)
+    #arg
+    ]
+)
+
+#let quadrantNumber(num) = {
+if num == 1 [
+    #if conf.board.direction == right [
+        #stack(
+            dir: rtl,
+            pointNumber(1, top),
+            pointNumber(2, top),
+            pointNumber(3, top),
+            pointNumber(4, top),
+            pointNumber(5, top),
+            pointNumber(6, top),
+        )
+        ] else [ 
+        #stack(
+            dir: ltr,
+            pointNumber(1, top),
+            pointNumber(2, top),
+            pointNumber(3, top),
+            pointNumber(4, top),
+            pointNumber(5, top),
+            pointNumber(6, top),
         )
 
-
-        // background board
-        #place(horizon + center,
-            rect(width: 13*30pt, height: 11*30pt, fill: yellow, inset: 0pt)
+        ]
+        ] else if num == 2 [
+    #if conf.board.direction == right [
+        #stack(
+            dir: rtl,
+            pointNumber(7, top),
+            pointNumber(8, top),
+            pointNumber(9, top),
+            pointNumber(10, top),
+            pointNumber(11, top),
+            pointNumber(12, top),
+        )
+        ] else [ 
+        #stack(
+            dir: ltr,
+            pointNumber(7, top),
+            pointNumber(8, top),
+            pointNumber(9, top),
+            pointNumber(10, top),
+            pointNumber(11, top),
+            pointNumber(12, top),
         )
 
-        // inner board
-        #place(horizon + center,
-            rect(width: 13*30pt, height: 11*30pt, inset: 0pt,
-                [
-
-                // cube
-                #place(bottom + left,
-                    dx: -1.2 * 30pt,
-                    square(size: 30pt, fill: black, radius: 5pt,
-                        [
-                        #set align(center + horizon)
-                        #set text(size: 24pt, fill: white)
-                        2
-                        ])
-                )
-
-                // point numbers
-                #place(top + left,
-                    dy: -1.1 *30pt,
-                    stack(
-                        dir:ltr,
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            13
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            14
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            15
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            16
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            17
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            18
-                            ]
-                        ),
-
-                    )
-                )
-
-                #place(top + right,
-                    dy: -1.1 *30pt,
-                    stack(
-                        dir:ltr,
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            19
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            20
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            21
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            22
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            23
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + bottom)
-                            #set text(size: 19pt)
-                            24
-                            ]
-                        ),
-
-                    )
-                )    
-
-                #place(bottom + left,
-                    dy: 1.1 *30pt,
-                    stack(
-                        dir:ltr,
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            12
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            11
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            10
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            9
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            8
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            7
-                            ]
-                        ),
-
-                    )
-                )
-
-                #place(bottom + right,
-                    dy: 1.1 *30pt, // 1 - thickness outer board
-                    stack(
-                        dir:ltr,
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            6
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            5
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            4
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            3
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            2
-                            ]
-                        ),
-
-                        square(size: 30pt, 
-                            [
-                            #set align(center + top)
-                            #set text(size: 19pt)
-                            1
-                            ]
-                        ),
-
-                    )
-                )
-
-
-
-                // checker bar
-                #place(top + center,
-                    dx: 0pt,
-                    dy: 0pt,
-                    rect(width: 1*30pt, height: 11*30pt, inset: 0pt))
-
-                // third quadrant
-                #place(top + left,
-                    dx: 0pt,
-                    dy: 0pt,
-
-                    stack(
-                        dir:ltr,
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-
-                    )
-                )
-
-                // fourth quadrant 
-                #place(top + right,
-                    dx: 0pt,
-                    dy: 0pt,
-
-                    stack(
-                        dir:ltr,
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-
-                    )
-                )
-
-                // second quadrant
-                #place(bottom + left,
-                    dx: 0pt,
-                    dy: 0pt,
-
-                    rotate(180deg)[
-
-                    #stack(
-                        dir:ltr,
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-
-                    )
-                    ]
-                )
-
-                // first quadrant
-                #place(bottom + right,
-                    dx: 0pt,
-                    dy: 0pt,
-
-                    rotate(180deg)[
-
-                    #stack(
-                        dir:ltr,
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: blue.lighten(80%),
-                            stroke: blue,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-                        polygon(
-                            fill: red.lighten(80%),
-                            stroke: red,
-                            (0%, 0pt),
-                            (30pt, 0pt),
-                            (0.5*30pt, 5*30pt),
-                        ),
-
-
-                    )
-                    ]
-                )
-
-                //white checkers
+        ]
+        ] else if num == 3 [
+    #if conf.board.direction == right [
+        #stack(
+            dir: ltr,
+            pointNumber(13, bottom),
+            pointNumber(14, bottom),
+            pointNumber(15, bottom),
+            pointNumber(16, bottom),
+            pointNumber(17, bottom),
+            pointNumber(18, bottom),
+        )
+        ] else [ 
+        #stack(
+            dir: rtl,
+            pointNumber(13, bottom),
+            pointNumber(14, bottom),
+            pointNumber(15, bottom),
+            pointNumber(16, bottom),
+            pointNumber(17, bottom),
+            pointNumber(18, bottom),
+        )
+
+        ]
+        ] else [
+    #if conf.board.direction == right [
+        #stack(
+            dir: ltr,
+            pointNumber(19, bottom),
+            pointNumber(20, bottom),
+            pointNumber(21, bottom),
+            pointNumber(22, bottom),
+            pointNumber(23, bottom),
+            pointNumber(24, bottom),
+        )
+        ] else [ 
+        #stack(
+            dir: rtl,
+            pointNumber(19, bottom),
+            pointNumber(20, bottom),
+            pointNumber(21, bottom),
+            pointNumber(22, bottom),
+            pointNumber(23, bottom),
+            pointNumber(24, bottom),
+        )
+
+        ]
+        ]
+}
+
+#let _drawBoard = rect(
+    width: board.width + 2*conf.board.thickness,
+    height: board.height +2*conf.board.thickness,
+    fill: conf.board.outerColor,
+    [
+
+    #let bar = rect(
+        width: 1*conf.checker.size,
+        height: 11*conf.checker.size,
+    )
+
+    #let triangle = (
+        id1: polygon(
+            fill: conf.point.color1.lighten(80%),
+            stroke: conf.point.color1,
+            (0%, 0pt),
+            (conf.checker.size, 0pt),
+            (0.5*conf.checker.size, 5*conf.checker.size),
+        ),
+        id2: polygon(
+            fill: conf.point.color2.lighten(80%),
+            stroke: conf.point.color2,
+            (0%, 0pt),
+            (conf.checker.size, 0pt),
+            (0.5*conf.checker.size, 5*conf.checker.size),
+        )
+    )
+
+    #let quadrant = stack(
+        dir: ltr,
+        triangle.id1,
+        triangle.id2,
+        triangle.id1,
+        triangle.id2,
+        triangle.id1,
+        triangle.id2,
+    )
+
+    #let checker = (
+        id1: circle(
+            radius: 0.5 * conf.checker.size,
+            fill: conf.checker.color1,
+            stroke: black),
+        id2: circle(
+            radius: 0.5 * conf.checker.size,
+            fill: conf.checker.color1,
+            stroke: black)
+    )
+
+
+
+    #place(horizon + center,
+        rect(
+            width: board.width,
+            height: board.height,
+            fill: conf.board.innerColor,
+            inset: 0pt,
+            [
+
+            #place(top + center, bar)
+
+            #place(bottom + cube.direction,
+                dx: (-conf.checker.size -conf.board.thickness -conf.cube.offset),
+                (cube.draw)(2))
+
+            #place(top + left, quadrant)
+            #place(top + right, quadrant)
+            #place(bottom + left, rotate(180deg)[#quadrant])
+            #place(bottom + right, rotate(180deg)[#quadrant])
+
+            // quadrant number
+            #if conf.board.direction == right [
+            #place(top + left, dy: -conf.checker.size -conf.board.thickness,
+                quadrantNumber(3))
+            #place(top + right, dy: -conf.checker.size -conf.board.thickness,
+                quadrantNumber(4))
+            #place(bottom + left, dy: conf.checker.size +conf.board.thickness,
+                quadrantNumber(2))
+            #place(bottom + right, dy: conf.checker.size +conf.board.thickness,
+                quadrantNumber(1))
+            ] else if conf.board.direction == left [
+            #place(top + right, dy: -conf.checker.size -conf.board.thickness,
+                quadrantNumber(3))
+            #place(top + left, dy: -conf.checker.size -conf.board.thickness,
+                quadrantNumber(4))
+            #place(bottom + right, dy: conf.checker.size +conf.board.thickness,
+                quadrantNumber(2))
+            #place(bottom + left, dy: conf.checker.size +conf.board.thickness,
+                quadrantNumber(1))
+            ]
+
+[
+
+                                //white checkers
 
                 #place(
                     bottom + left,
-                    dx: (6 -1) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (6 -1) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black),
+                        checker.id2,
+                        checker.id2,
                     )
                 )
 
                 #place(
                     top + right,
-                    dx: (1 -2) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -2) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black),
+                        checker.id2,
+                        checker.id2,
                     )
                 )
 
                 #place(
                     top + right,
-                    dx: (1 -1) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -1) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: white, stroke: black, 
+                        checker.id2,
+                        checker.id2,
+                        checker.id2,
+                        checker.id2,
+                        circle(radius: 0.5 * conf.checker.size, fill: white, stroke: black, 
                             [
                             #set align(center + horizon)
                             #set text(size: 19pt)
@@ -585,16 +285,16 @@
 
                 #place(
                     top + right,
-                    dx: 1.1 * 30pt,
-                    dy: 0 * 30pt,
+                    dx: 1.1 * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
                         spacing: 2.3pt,
-                        rect(width: 30pt, height: 0.13 * 30pt, fill: white, stroke: black),
-                        rect(width: 30pt, height: 0.13 * 30pt, fill: white, stroke: black),
-                        rect(width: 30pt, height: 0.13 * 30pt, fill: white, stroke: black),
-                        rect(width: 30pt, height: 0.13 * 30pt, fill: white, stroke: black),
-                        rect(width: 30pt, height: 0.13 * 30pt, fill: white, stroke: black),
+                        rect(width: conf.checker.size, height: 0.13 * conf.checker.size, fill: white, stroke: black),
+                        rect(width: conf.checker.size, height: 0.13 * conf.checker.size, fill: white, stroke: black),
+                        rect(width: conf.checker.size, height: 0.13 * conf.checker.size, fill: white, stroke: black),
+                        rect(width: conf.checker.size, height: 0.13 * conf.checker.size, fill: white, stroke: black),
+                        rect(width: conf.checker.size, height: 0.13 * conf.checker.size, fill: white, stroke: black),
                     )
                 )
 
@@ -602,126 +302,144 @@
 
                 #place(
                     center + horizon,
-                    dx: 0 * 30pt,
-                    dy: -1 * 30pt,
+                    dx: 0 * conf.checker.size,
+                    dy: -1 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     top + right,
-                    dx: (1 -5) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -5) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     bottom + left,
-                    dx: (1 -1) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -1) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     bottom + left,
-                    dx: (2 -1) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (2 -1) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     bottom + right,
-                    dx: (1 -6) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -6) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     bottom + right,
-                    dx: (1 -5) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -5) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     bottom + right,
-                    dx: (1 -4) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -4) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     bottom + right,
-                    dx: (1 -3) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -3) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 #place(
                     bottom + right,
-                    dx: (1 -2) * 30pt,
-                    dy: 0 * 30pt,
+                    dx: (1 -2) * conf.checker.size,
+                    dy: 0 * conf.checker.size,
                     stack(
                         dir:ttb,
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
-                        circle(radius: 0.5 * 30pt, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
+                        circle(radius: 0.5 * conf.checker.size, fill: black, stroke: black),
                     )
                 )
 
                 // end board
                 ]
-            ) 
+
+            ]
         )
+    )
+    ]
+)
+
+#let infoDisplay(msg, alignDir, textSize: 12pt) = rect(
+    width: (board.width +2*conf.checker.size +2*conf.board.thickness)/2,
+    height: conf.checker.size,
+    [
+    #set text(size: textSize)
+    #set align(alignDir)
+    #msg
+    ]
+)
 
 
-        // end table
-        ]
+#set align(center)
+
+#grid(
+    rows: (conf.checker.size, auto, conf.checker.size),
+    gutter: 3pt,
+
+    grid(
+        columns: (auto, auto),
+        gutter: 3pt,
+        infoDisplay("Unlimited match", left + horizon),
+        infoDisplay("(5 checkers off) pip: 29", right + horizon),
+    ),
+
+    rect(
+        width: board.width +2*conf.checker.size +2*conf.board.thickness,
+        height: board.height +2*conf.checker.size +2*conf.board.thickness,
+        inset: 0pt,
+        [ #place(horizon + center, _drawBoard) ]
     ),
 
     grid(
         columns: (auto, auto),
         gutter: 3pt,
-
-        rect(width: 7.7*30pt, height: 30pt, inset: 0pt, [
-            #set text(size: 12pt)
-            #set align(left + horizon)
-            #h(10pt)
-            ]),
-
-        rect(width: 7.7*30pt, height: 30pt, inset: 0pt, [
-            #set text(size: 12pt)
-            #set align(right + horizon)
-            pip: 114
-            #h(10pt)
-            ]),
-
+        infoDisplay("", left + horizon),
+        infoDisplay("pip: 114", right + horizon),
     ),
 
 ) // end grid
