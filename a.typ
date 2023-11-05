@@ -3,13 +3,14 @@
         direction: right,
         thickness: 3pt,
         outerColor: black,
-        innerColor: green,
+        innerColor: yellow,
     ),
     cube : (
+        size: 32pt,
         color: black,
         textSize: 24pt,
         textColor: white,
-        offset: 5pt,
+        offset: 1.5pt,
     ),
     checker : (
         size: 30pt,
@@ -24,7 +25,7 @@
 )
 
 #let _drawCube(value, textSize: 24pt) = square(
-    size: conf.checker.size,
+    size: conf.cube.size,
     fill: conf.cube.color, radius: 5pt,
     [
     #set align(center + horizon)
@@ -33,7 +34,6 @@
     ])
 
 #let cube = (
-    draw: _drawCube,
     direction: conf.board.direction.inv()
 )
 
@@ -208,9 +208,15 @@ if num == 1 [
 
             #place(top + center, bar)
 
-            #place(bottom + cube.direction,
-                dx: (-conf.checker.size -conf.board.thickness -conf.cube.offset),
-                (cube.draw)(2))
+            #if conf.board.direction == right [
+                #place(bottom + cube.direction,
+                    dx: -conf.cube.size -conf.board.thickness -conf.cube.offset,
+                    _drawCube(2))
+                ] else [
+                #place(bottom + cube.direction,
+                    dx: conf.cube.size +conf.board.thickness +conf.cube.offset,
+                    _drawCube(2))
+                ]
 
             #place(top + left, quadrant)
             #place(top + right, quadrant)
